@@ -1,3 +1,4 @@
+import 'package:chatting_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -64,7 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: StadiumBorder(),
                 elevation: 4,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+              },
 
               //Login Icon
               icon: Image.asset(
