@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     //initializing media query (for getting device screen size)
-    mq = MediaQuery.of(context).size;
+    //mq = MediaQuery.of(context).size;
     return Scaffold(
       //app bar
       appBar: AppBar(

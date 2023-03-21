@@ -1,5 +1,6 @@
 import 'package:chatting_app/screens/auth/login_screen.dart';
 import 'package:chatting_app/screens/home_screen.dart';
+import 'package:chatting_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 //firebase package
@@ -11,6 +12,7 @@ late Size mq;
 
 
 void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
   _initializeFirebase();
   runApp(const MyApp());
 }
@@ -39,7 +41,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
