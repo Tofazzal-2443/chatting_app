@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '142725166511',
     projectId: 'chatting-app-759a0',
     storageBucket: 'chatting-app-759a0.appspot.com',
+    androidClientId: '142725166511-ikq6ctob20uu20dt1hrognj4kougffvp.apps.googleusercontent.com',
     iosClientId: '142725166511-qttm3ddm0mp84a9l8g26fii2j8sg5qj7.apps.googleusercontent.com',
     iosBundleId: 'com.example.chattingApp',
   );

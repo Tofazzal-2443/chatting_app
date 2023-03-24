@@ -1,5 +1,7 @@
+import 'package:chatting_app/screens/auth/login_screen.dart';
 import 'package:chatting_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../main.dart';
 
@@ -12,16 +14,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool _isAnimate = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomeScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const LoginScreen()));
       },
     );
   }
@@ -49,9 +50,23 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
+            child: Container(
+              child: SpinKitFadingCircle(
+                size: 30,
+                itemBuilder: (BuildContext context, int index) {
+                  return DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: index.isEven ? Colors.blue : Colors.greenAccent,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          Positioned(
             bottom: mq.height * .15,
             width: mq.width,
-            child: Text(
+            child: const Text(
 
               "MADE IN BANGLADESH ❤",
               textAlign: TextAlign.center,

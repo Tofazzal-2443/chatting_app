@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:chatting_app/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../main.dart';
 
@@ -12,19 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  bool _isAnimate = false;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Future.delayed(
-      Duration(milliseconds: 500),
-      () {
-        _isAnimate = true;
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
 
           //App logo icon
-          AnimatedPositioned(
+          Positioned(
             top: mq.height * .15,
-            right: _isAnimate ? mq.width * .25 : -mq.width * .5,
+            right: mq.width * .25,
             width: mq.width * .5,
             child: Image.asset(
               "images/icon.png",
             ),
-            duration: Duration(seconds: 1),
+
           ),
 
           //google login button
@@ -66,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 elevation: 4,
               ),
               onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                _handleGoogleBtnClick();
               },
 
               //Login Icon
@@ -93,4 +85,31 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  //Firebase Google email authentication code
+  _handleGoogleBtnClick() {
+    _signInWithGoogle().then((user) {
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const HomeScreen()));
+    });
+  }
+
+  Future<UserCredential> _signInWithGoogle() async {
+    
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
 }

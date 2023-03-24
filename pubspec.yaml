@@ -37,7 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   #For integrating firebase
   firebase_core: ^2.8.0
-  #firebase_auth: ^4.3.0
+  firebase_auth: ^4.3.0
+  google_sign_in: ^6.0.2
+  # Progress Indicator
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
