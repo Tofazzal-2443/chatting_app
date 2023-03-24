@@ -1,6 +1,7 @@
 import 'package:chatting_app/screens/auth/login_screen.dart';
 import 'package:chatting_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../main.dart';
@@ -14,7 +15,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -22,7 +22,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const LoginScreen()));
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+        SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const LoginScreen()));
       },
     );
   }
@@ -67,14 +71,10 @@ class _SplashScreenState extends State<SplashScreen> {
             bottom: mq.height * .15,
             width: mq.width,
             child: const Text(
-
               "MADE IN BANGLADESH ❤",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.black87,
-                letterSpacing: .5
-              ),
+                  fontSize: 16, color: Colors.black87, letterSpacing: .5),
             ),
           ),
         ],

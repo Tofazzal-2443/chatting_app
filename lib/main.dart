@@ -5,16 +5,25 @@ import 'package:flutter/material.dart';
 
 //firebase package
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 
 //global object for accessing device screen size
 late Size mq;
 
-
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
-  _initializeFirebase();
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //enter full screen
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+  //for setting orientation to portrait only
+  SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((value) {
+    _initializeFirebase();
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +55,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-_initializeFirebase() async{
+_initializeFirebase() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
