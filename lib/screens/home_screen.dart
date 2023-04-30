@@ -1,4 +1,5 @@
-import 'package:chatting_app/widgets/chat_user_card.dart';
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -48,13 +49,30 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       //home page bode design
-      body: ListView.builder(
-          itemCount: 15,
-          padding: EdgeInsets.only(top: mq.height * .01),
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            return const ChatUserCard();
-          }),
+      body: StreamBuilder(
+        stream: APIs.firestore.collection('user').snapshots(),
+        builder: (context, snapshot) {
+          
+          final list = [];
+          if (snapshot.hasData){
+            final data = snapshot.data?.docs;
+            for (var i in data!){
+              log('Data: ${i.data()}');
+              list.add(i.data()['name']);
+            }
+
+          }
+          return ListView.builder(
+            itemCount: list.length,
+            padding: EdgeInsets.only(top: mq.height * .01),
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Text('Name: ${list[index]}');
+
+            },
+          );
+        },
+      ),
     );
   }
 }
