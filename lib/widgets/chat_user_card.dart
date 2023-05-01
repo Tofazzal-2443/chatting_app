@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 
-class ChatUserCard extends StatefulWidget {
+class ChatUserCard extends StatelessWidget {
   const ChatUserCard({super.key});
 
-  @override
-  State<ChatUserCard> createState() => _ChatUserCardState();
-}
-
-class _ChatUserCardState extends State<ChatUserCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
